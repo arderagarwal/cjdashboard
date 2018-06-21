@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+	<title>Login Page</title>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+  	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+  	<style type="text/css">
+
+  		#jumbo{
+				text-align: center;
+				background-repeat: no-repeat;
+				background-image: url("{% static "images/jumbo.jpg" %}");
+				background-size: cover;
+				color: white;
+				margin: 0px;
+				border: 0px;
+
+  		}
+  		.inputs{
+
+  			margin-left: 32%;
+
+  		}
+  		#cent{
+  			display: block;
+  			margin: 1px auto;
+  		}
+  	</style>
+</head>
+<body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<nav class="ui inverted secondary menu">
+  		<a class="item" href="{% url 'recruiter:register'%}" > <img class="ui medium image" src="{% static "images/codejudge1.png" %}"> </a>
+  		<div class="right menu">
+    	<a class="item" href="{% url 'recruiter:register'%}"><button class="ui inverted red button">Signup</button></a>
+  	</nav>
+	<div class="jumbotron jumbotron-fluid" id="jumbo" >
+
+		<h1 class="display-4">Test Real World Problem Solving</h1><br><br>
+ 		<h1>Eat,Sleep,Recruit,Repeat!</h1><br><br>
+ 			<form action="{% url 'recruiter:user_login'%}" method="post">
+				{% csrf_token %}
+				<div class="inputs">
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<input type="text" class="form-control" id="inputText4 " name="username" placeholder="Username"><br>
+				 		</div>
+					</div>
+					<div class="form-row">
+				 		<div class="form-group col-md-6">
+							<input type="password" name="password" class="form-control" id="inputPassword4" placeholder="Password"> <br>
+							<input class="ui inverted active red button" type="submit" name="" value="Login"><br><br><br><br><br><br>
+						</div>
+					</div>
+				</div>
+			</form>
+	</div>
+		<footer style="text-align: center; color: black;">
+		<br>
+		<img class="ui medium image" src="{% static "images/codejudge1.png" %}" id="cent">
+		<br>
+		<i class="facebook icon"></i>
+		<i class="twitter icon"></i>
+		<i class="google drive icon"></i>
+		<i class="flickr icon"></i>
+		<br><br>
+		<p style="text-align: center;">&copy; COPYRIGHT CODEJUDGE. ALL RIGHTS RESERVED</p>
+		<br><br>
+	</footer>
+</body>
+</html>

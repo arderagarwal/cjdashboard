@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>Dashboard Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <!-- Custom styles for this template -->
+    <style type="text/css">
+      body {
+  font-size: .875rem;
+}
+
+.feather {
+  width: 16px;
+  height: 16px;
+  vertical-align: text-bottom;
+}
+
+/*
+ * Sidebar
+ */
+
+.side {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100; /* Behind the navbar */
+  padding: 0;
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.side-sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 48px; /* Height of navbar */
+  height: calc(100vh - 48px);
+  padding-top: .5rem;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+.sidebar .nav-link {
+  font-weight: 500;
+  color: #333;
+}
+
+.sidebar .nav-link .feather {
+  margin-right: 4px;
+  color: #999;
+}
+
+.sidebar .nav-link.active {
+  color: #007bff;
+}
+
+.sidebar .nav-link:hover .feather,
+.sidebar .nav-link.active .feather {
+  color: inherit;
+}
+
+.sidebar-heading {
+  font-size: .75rem;
+  text-transform: uppercase;
+}
+
+/*
+ * Navbar
+ */
+
+.navbar-brand {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  font-size: 1rem;
+  background-color: rgba(0, 0, 0, .25);
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+}
+
+.navbar .form-control {
+  padding: .75rem 1rem;
+  border-width: 0;
+  border-radius: 0;
+}
+
+.form-control-dark {
+  color: #fff;
+  background-color: rgba(255, 255, 255, .1);
+  border-color: rgba(255, 255, 255, .1);
+}
+
+.form-control-dark:focus {
+  border-color: transparent;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+}
+
+/*
+ * Utilities
+ */
+
+.border-top { border-top: 1px solid #e5e5e5; }
+.border-bottom { border-bottom: 1px solid #e5e5e5; }
+
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#"> <img class="ui medium image" src="{% static "images/codejudge.png" %}"> </a>
+      <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="{% url 'logout' %}"><input class="ui inverted active red button" type="submit" name="" value="Logout"></a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 ui inverted massive vertical menu side ">
+          <div class="side-sticky">
+            <div class="item">
+          		<div class="header">User Level</div>
+          		<div class="menu">
+          			{% for uli in userlevel %}
+                <div class="item">{{uli.Name}}</div>
+          		 	{% endfor %}
+              </div>
+          	</div>
+          	<div class="item">
+              <div class="header">TechnologyVertical</div>
+          		 <div 	class="menu">
+          			{% for techv in technov %}
+                <a class="item technologyvertical"  name={{techv.id}}>{{techv.name}}</a>
+          			{% endfor %}
+              </div>
+            </div>
+
+          	<div class="item">
+              <div class="header">Track</div>
+          		 <div class="menu">
+          			{% for tr in track %}
+                <a class="item track" name={{tr.id}}>{{tr.name}}</a>
+          		 	{% endfor %}
+              </div>
+            </div>
+          </div>
+</div>
+</nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+            <h2 class="h2"></h2>
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <div class="container" id="conti">
+              			{% for as in assign %}
+              			<div class="container">
+               <h2>{{ as.vertical_id }}</h2>
+               <h2>{{ as.track_id }}</h2>
+               <h3>{{ as.name }} </h3>
+               <h4>{{ as.description }} </h4>
+               <div class="ui checkbox">
+              		 <input type="checkbox" id="terms">
+              		 <label for="terms">Add this Milestone</label>
+              	 </div>
+              		</div>
+              		{% endfor %}
+              </div>
+            </div>
+          </div>
+
+
+        </main>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../../../dist/js/bootstrap.min.js"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <!-- Graphs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+      <script>
+       var dat;
+       var ide;
+       var nam;
+       var output;
+       var i=0;
+       var j=0;
+       var val=0;
+       var gal=0;
+       var tv=0;
+       var t=0;
+
+      $.get("http://127.0.0.1:8000/recruiter/assignments/ ", function(data){
+      	dat =data;
+      	console.log(data);
+      });
+
+
+      $(".technologyvertical").click(function(){
+      	var d =0;
+      		if(val==0)
+      		{
+      			val =1;
+      			i=0;
+      		}
+      		else {
+      			val =0;
+      			i=0;
+      		}
+
+      		ide=(this).name;
+      		console.log(ide)
+      		nam=dat;
+      		tv = ide;
+      		if(t!=0)
+      		{
+      			$.each(nam, function() {
+
+      						 if (this.vertical_id == ide && this.track_id==t)
+      	           {
+      							 if(i==0)
+      							 {
+      									$('#conti').html('<li><h3>' +this.name +'</h3>' + '<h4>' + this.description + '</h4></li>');
+      									i=i+1;
+      									d=1;
+      							 }
+      							 else {
+      							 		$('#conti').append('<li><h3>' +this.name +'</h3>' + '<h4>' + this.description + '</h4></li>');
+      									d=1;
+      							 }
+      						 }
+
+
+      		});
+      	}
+      	if(t==0){
+      		$.each(nam, function() {
+
+      						 if (this.vertical_id == ide)
+      	           {
+      							 if(i==0)
+      							 {
+      								$('#conti').html('<li><h3>' +this.name +'</h3>' + '<h4>' + this.description + '</h4></li>');
+      								i=i+1;
+      								d=1;
+      							 }
+      							 else {
+      							 	$('#conti').append('<li><h3>' +this.name +'</h3>' + '<h4>' + this.description + '</h4></li>');
+      								d=1;
+      							 }
+      						 }
+      		});
+      	}
+      	if(d==0)
+      	{
+      		$('#conti').html('<p>Sorry the we have no assignments yet for the current selection</p>');
+      	}
+      });
+      	$(".track").click(function(){
+      		var e=0;
+      		if(gal==0)
+      		{
+      			gal =1;
+      			i=0;
+      		}
+      		else {
+      			gal =0;
+      			i=0;
+      		}
+
+      		ide=(this).name;
+      		t=ide;
+      		console.log(ide)
+      		nam=dat;
+      		if(tv!=0)
+      		{
+      			$.each(nam, function() {
+
+      							 if (this.vertical_id == tv && this.track_id==ide)
+      							 {
+      								 if(j==0)
+      								 {
+      									$('#conti').html('<li><h3>' +this.name +'</h3>' + '<h4>' + this.description + '</h4></li>');
+      									i=j+1;
+      									e=1;
+      								 }
+      								 else {
+      									$('#conti').append('<li><h3>' +this.name +'</h3>' + '<h4>' + this.description + '</h4></li>');
+      									e=1;
+      								 }
+
+      							 }
+      			});
+      		}
+      		if(tv==0)
+      		{
+      			$.each(nam, function() {
+      							 if (this.track_id == ide)
+      							 {
+
+      								 if(j==0)
+      								 {
+      									$('#conti').html('<li><h3>' +this.name +'</h3>' + '<h4>' + this.description + '</h4></li>');
+      									j=j+1;
+      									e=1;
+      								 }
+      								 else {
+      									$('#conti').append('<li><h3>' +this.name +'</h3>' + '<h4>' + this.description + '</h4></li>');
+      									e=1;
+      								 }
+
+      							 }
+      			});
+      		}
+      		if(e==0)
+      		{
+      			$('#conti').html('<p>Sorry the we have no assignments yet for the current selection!</p>');
+      		}
+      });
+
+      </script>
+  </body>
+</html>

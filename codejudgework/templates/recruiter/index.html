@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+	<title>CodeJudge Work</title>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+  	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+  	<style type="text/css">
+		#navi{
+			color: red;
+		}
+  		#jumbo{
+  			text-align: center;
+  			background-repeat: no-repeat;
+  			background-image: url("{% static "images/jumbo.jpg" %}");
+  			background-size: cover;
+  			color: white;
+  			margin: 0px;
+  			border: 0px;
+  		}
+
+
+  		#cent{
+  			margin: 1px auto;
+  			display: block;
+  		}
+  		#cente{
+  			text-align: center;
+  		}
+  	</style>
+</head>
+<body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<nav class="ui secondary menu" id='navi'>
+  		<a class="item"  href="{% url 'recruiter:register'%}"> <img class="ui medium image" src="{% static "images/codejudge1.png" %}"> </a>
+  		<div class="right menu">
+  		<a class="item">Solutions</a>
+    	<a class="item">Customers</a>
+    	<a class="item">Pricing</a>
+    	<a class="item">Contact us</a>
+    	<a class="item" href="{% url 'recruiter:user_login' %}"><button class="ui inverted red button">Login</button></a>
+  	</nav>
+  	<div class="jumbotron" id="jumbo">
+  		<h1 class="display-4">Test Real World Problem Solving</h1><br><br>
+ 		<h1>Eat,Sleep,Recruit,Repeat!</h1>
+		{% if registered %}
+			<h3> Thanks for registering </h3>
+		{% else %}
+			<form id='form' method="post" style="margin-left: 80%;">
+        {% csrf_token %}
+        {{ user_form.as_p}}
+				{{ recruiter_form.as_p}}
+				<button type="submit" value="register" class="ui inverted active red button">Sign up</button>
+			</form>
+		{% endif %}
+	</div>
+	<footer style="text-align: center;">
+		<br><br>
+		<img class="ui medium image" src={% static "images/codejudge1.png" %} id="cent">
+		<br>
+		<i class="facebook icon"></i>
+		<i class="twitter icon"></i>
+		<i class="google drive icon"></i>
+		<i class="flickr icon"></i>
+		<br><br>
+		<p style="text-align: center;">&copy; COPYRIGHT CODEJUDGE. ALL RIGHTS RESERVED</p>
+		<br><br>
+	</footer>
+</body>
+</html>
